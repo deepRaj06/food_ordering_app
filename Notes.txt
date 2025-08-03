@@ -1,0 +1,192 @@
+*******************Commands*********************19:34
+1. npx create-expo-app@latest
+2. npx expo start
+3. npm run reset-project
+4. npx expo start --clear
+5. npm install clsx
+6. npx expo install react-native-appwrite
+7. npx @sentry/wizard@latest -i reactNative
+
+*******************Tools Used*****************
+1. Expo - Spin up react native apps faster.
+2. Nativewind - styling
+3. Zustand - managing states
+4. Appwrite - powering your backend
+5. Sentry - shipping bug free code;
+6. Junie - smart coding agent
+7. Webstorm - ide for javascript and typescript
+
+*******************File Description*************
+A. tsconfig.json - 
+    This file includes rules that typescript use to enforce type safety throughout the project.
+B. package.json - 
+    Contains all of project dependencies, scripts, metadata
+C. app.json - 
+    Contains configuration option of the projects,
+    These options change the behaviour of the project while developing/submitting your app.
+    Expln:expo
+        1. name - root object containing all of app's configuration i.e. app name (name appears on home list)
+        2. slug - uniqely identifier of project used to find url of the app if you are running it on web.
+        3. orientation - default orientation of your project i.e. portrait
+        4. scheme - to enable deep linking
+        5. userinterfaceStyle - automatic/light/dark
+D. .gitignore - 
+    Store local items to prevent it from pushing it into production.
+
+E. eslint.config.js
+    - this file make sures our code is clean.
+
+F. /scripts/reset-project.js
+    - for resetting our project to bare minimum code
+    - to reset projects:
+        npm run reset-project
+        npx expo start
+    - delete app-example folder from project now
+
+G. Boiler plate folders:
+    - hooks
+    - constants
+    - components
+    - assets
+    - app   
+        /tabs/ ( where tabs is a group consisting of more files ).
+
+
+**********************Appwrite*******************
+1. Usecase:
+    a. Authenticate our users on login page.
+    b. Store menu items
+    c. Manage our images
+2. Link: https://cloud.appwrite.io/console/organization-6552059f42919b00e364
+    a. Project name - 
+    b. Select react native - 
+    c. package_name - com.self.foodordering
+    d. library - npx expo install react-native-appwrite react-native-url-polyfill
+    e. create .env file at root - paste two lines from https://cloud.appwrite.io/console/project-fra-688df0800009f4e51363/get-started
+    f. lib - 
+        - appwrite.ts
+            --> write all appwrite credentials
+    g. create a db - app
+        --> Copy the id and store it in appwrite config
+        --> Inside that db - create a new user collection - User
+            --> assign a attributes for user collection
+
+*********************Sentry**********************
+1. Fixes code breaks faster --> application monitoring software considered "not bad" by 4 million developers.
+2. Link - https://sentry.io/jsmastery/?
+3. Doc - https://docs.sentry.io/platforms/react-native/manual-setup/expo/
+4. Commands - 
+    - npx @sentry/wizard@latest -i reactNative
+
+********************Nativewind ( for styling react native css )********************
+1. npm install nativewind react-native-reanimated@~3.17.4 react-native-safe-area-context@5.4.0
+npm install --dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11
+2. npx tailwindcss init - to create a new tailwind config file
+3. Replace newly created tailwind config file with file written on docs
+4. Create globals.css - add tailwind directives
+5. babel.config.js - add code from docs
+6. metro.config.js - add code from docs
+7. importing globals.css inside App.js or _layout.js
+8. Create a nativewind-env.d.ts file  --> paste this reference --> /// <reference types="nativewind/types" />
+
+Note: Still after applying above changes, nativewind css is not working
+To make it work --> give right path in tailwind.config.js -->   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+
+9. run --> npx expo start --clear
+10. Changes in metro.config.js 
+    - module.exports = withNativeWind(config, { input: './app/global.css' })
+
+
+*******************Code Flow*********************
+1. Custom Coloring - tailwind.config.js  
+2. Custom font size - use assets ( from JS mastery)
+3. /app
+    index.tsx
+    _layout.tsx - try to put anything which you want to apply to whole code
+                - SplashScreen
+4. HomePage
+    index.tsx - 
+    globals.css - updated
+    npm install clsx - for alternative text and image
+
+    Note: Never ever place Flatlist inside SafeAreaView as it broke Flatlist functionality which is to render items 
+        which are on screen while Scrollview renders all items at once.
+
+    CartButton.tsx (reusable component)
+        - Global state for the no of items we had in our cart.
+        
+5. Routing
+    - Using groups
+        - (auth) --> brackets are identified as groups
+
+6. Appwrite - https://cloud.appwrite.io/console/organization-6552059f42919b00e364
+
+7. Authentication - 
+    - User enters data
+    - Call the Appwrite Auth function
+    - Create a new Auth user
+    - Call AppwriteDB
+    - Store in the User Collection
+    - User can have multiple orders/addresses
+
+Note: For these need to create a db in appwrite
+
+8. (auth)/_layout.tsx - 
+    - create a top section ui for signIn/signUp
+
+9. Reusable components - 
+    - Input field --> CustomInput.tsx
+    - button --> CustomButton.tsx
+    - Use them under sign-in.tsx page - proper code and ui integrated
+    - Use them in sign-up.tsx page - proper code and ui integrated
+
+10. Auth functionality - 
+    - appwrite.ts --> 
+    - use it in signup.tsx
+    - give permissions (all crud ticked) for user in appwrite to make createUser function work.
+    - Instead of getting user info on every screen just store in global state and use it everywhere - Sentry
+
+11. Sentry - 
+    - 
+
+
+
+
+******************Folders**********************
+1. /root
+    /app
+        _layout.tsx
+        globals.css
+        index.tsx
+        (auth)
+            _layout.tsx
+            sign-in.tsx
+            sign.up.tsx
+        (tabs) - bottom tabs
+            index.tsx - moved from app
+            _layout.tsx
+            cart.tsx
+            profile.tsx
+            search.tsx
+
+    /assets
+    /constants
+        index.ts
+    images.d.ts
+    /components 
+        CartButton.tsx
+        CustomButton.tsx
+        CustomInput.tsx
+
+
+***********************Pushing code to GitHub***********************
+1. Create a repo - food-order
+2. git init 
+3. git add .
+4. git commit -m"adding basic files/folder to code"
+5. git branch -m main
+6. git remote add origin your_github_link
+7.     
+
+
+
