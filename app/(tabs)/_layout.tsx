@@ -1,9 +1,10 @@
+import useAuthStore from '@/store/auth.store';
 import { Redirect, Slot } from 'expo-router';
 import React from 'react';
 
-const _Layout = () => {
+const TabLayout = () => {
 
-    const isAuthenticated = true;
+  const { isAuthenticated } = useAuthStore();
 
     if(!isAuthenticated) return <Redirect href="/sign-in"/>
     // Slot from router render the res of the content as it is 
@@ -11,4 +12,4 @@ const _Layout = () => {
   return <Slot/>
 }
 
-export default _Layout
+export default TabLayout

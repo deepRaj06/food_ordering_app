@@ -6,6 +6,7 @@
 5. npm install clsx
 6. npx expo install react-native-appwrite
 7. npx @sentry/wizard@latest -i reactNative
+8. npm install zustand
 
 *******************Tools Used*****************
 1. Expo - Spin up react native apps faster.
@@ -78,6 +79,11 @@ G. Boiler plate folders:
 4. Commands - 
     - npx @sentry/wizard@latest -i reactNative
 
+*********************Zustand*********************
+1. Link - https://zustand.docs.pmnd.rs/getting-started/introduction
+2. Command - npm install zustand
+3. 
+
 ********************Nativewind ( for styling react native css )********************
 1. npm install nativewind react-native-reanimated@~3.17.4 react-native-safe-area-context@5.4.0
 npm install --dev tailwindcss@^3.4.17 prettier-plugin-tailwindcss@^0.5.11
@@ -147,7 +153,15 @@ Note: For these need to create a db in appwrite
     - Instead of getting user info on every screen just store in global state and use it everywhere - Sentry
 
 11. Sentry - 
-    - 
+    - Created a fake button in /tabs.index.tsx to see sentry and seer from it 
+    - real use case --> Sign-in page
+
+12. Zustand - Global Store 
+    - /store/auth.store.ts
+    - /app/auth/_layout
+    - /app/tabs/_layout
+    - /app?_layout
+    - /app/tabs/index.tsx
 
 
 
@@ -177,6 +191,8 @@ Note: For these need to create a db in appwrite
         CartButton.tsx
         CustomButton.tsx
         CustomInput.tsx
+    /store
+        auth.store.ts
 
 
 ***********************Pushing code to GitHub***********************

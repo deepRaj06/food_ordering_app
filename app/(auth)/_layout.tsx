@@ -1,7 +1,6 @@
-import CustomButton from '@/components/CustomButton';
-import CustomInput from '@/components/CustomInput';
-import {images} from '@/constants';
-import {Slot} from 'expo-router';
+import { images } from '@/constants';
+import useAuthStore from '@/store/auth.store';
+import { Redirect, Slot } from 'expo-router';
 import React from 'react';
 import {
   Dimensions,
@@ -13,7 +12,12 @@ import {
   View,
 } from 'react-native';
 
-const _Layout = () => {
+const AuthLayout = () => {
+
+  const {isAuthenticated} = useAuthStore();
+
+  if(isAuthenticated) return <Redirect href='/'/>
+  
   return (
     // Below component ensures when user writing input keyboard should appear below it not above that
     // iOS - need to add some padding
@@ -54,4 +58,4 @@ const _Layout = () => {
   );
 };
 
-export default _Layout;
+export default AuthLayout;
