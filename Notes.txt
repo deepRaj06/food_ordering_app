@@ -1,4 +1,4 @@
-*******************Commands*********************19:34
+*******************Commands*********************02:19:23
 1. npx create-expo-app@latest
 2. npx expo start
 3. npm run reset-project
@@ -162,6 +162,11 @@ Note: For these need to create a db in appwrite
     - /app/tabs/_layout
     - /app?_layout
     - /app/tabs/index.tsx
+
+13. Tab Navigation - https://docs.expo.dev/router/advanced/tabs/
+    - Expo like NextJS uses file based routing system.
+    
+
 
 
 
